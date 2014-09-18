@@ -18,3 +18,17 @@ Support for the ezoption and ezcountry datatype and csv header export from githu
 
 Improved support for the ezselection datatype from Guillaume Kulakowski, projects.ez.no/cie/forum/general/bug_with_ezselection_and_cie_1_0_4
 
+Support for the eztime, ezdate, ezdatetime and ezboolean datatypes from Brookins Consulting, brookinsconsulting.com
+
+Parser improvements from github.com/Open-Wide
+
+Fix UTF-8 BOM for Excel from github.com/matthewkp
+
+Code Standards improvements from Brookins Consulting, brookinsconsulting.com
+
+Modulelist ini setting addition from github.com/Open-Wide
+
+Empty attribute export behavior change from github.com/Open-Wide
+
+Empty attribute ini setting to control empty attribute export behavior change from Brookins Consulting, brookinsconsulting.com
+
