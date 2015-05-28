@@ -1,3 +1,4 @@
+{def $display_leave_empty_option=ezini( 'CieSettings', 'DisplayLeaveEmptyOption', 'cie.ini' )|eq( 'enabled' )}
 <form name="collections" method="post" action={concat( '/bccie/doexport/', $object.id )|ezurl}>
 
 {let number_of_items=min( ezpreference( 'admin_infocollector_list_limit' ), 3)|choose( 10, 10, 25, 50 )}
@@ -54,7 +55,7 @@
 <input name="end_year" class="box" size="5" value="{$end_year|wash}" />
 </div>
 </div>
-<div align="right"> 
+<div align="right">
 {section show=$collection_array}
 <input class="button" style="position:relative;top:-10px;" type="submit" name="DoExport" value="{'Do export'|i18n( 'design/bccie/export' )}" title="{'Do export.'|i18n( 'design/bccie/export' )}" />
 {section-else}
@@ -71,6 +72,22 @@
 </div>
 </div>
 
+{* export create and modification date *}
+<fieldset>
+    <legend>{'Export creation and modification date'|i18n( 'design/bccie/export' )}</legend>
+    <div class="block">
+        <div class="element">
+            {'Export Creation Date'|i18n( 'design/bccie/export' )}:
+            <input name="creation_date" type="checkbox" value="1" />
+        </div>
+        <div class="element">
+            {'Export Modification Date'|i18n( 'design/bccie/export' )}:
+            <input name="modification_date" type="checkbox" value="1" />
+        </div>
+    </div>
+    <div class="break"></div>
+</fieldset>
+
 {* Collection table. *}
 {let counter=0}
 
@@ -86,7 +103,9 @@
                                 {/section}
                         {/let}
                 {/section}
+                {if $display_leave_empty_option}
                 <option value="-1"> {'Leave empty (note: field still gets created)'|i18n('design/bccie/export')} </option>
+                {/if}
                 <option value="-2"> {"Ignore (note: field doesn't get created at all)"|i18n('design/bccie/export')} </option>
             </select>
         </fieldset>
@@ -99,7 +118,7 @@
                                 <legend>{'Field #%counter'|i18n('design/bccie/export',, hash( '%counter', $counter) )}</legend>
                                     <select name="field_{$counter}">
                                         <option selected="selected" value="contentobjectid">Content object id</option>
-                                
+
                                         {section loop=$class.data_map}
                                                 {let current_inner_attribute=$:item}
                                                         {section show=$current_inner_attribute.is_information_collector }
@@ -111,14 +130,16 @@
                                                         {/section}
                                                 {/let}
                                         {/section}
+                                        {if $display_leave_empty_option}
                                         <option value="-1"> {'Leave empty (note: field still gets created)'|i18n('design/bccie/export')} </option>
+                                        {/if}
                                         <option value="-2"> {"Ignore (note: field doesn't get created at all)"|i18n('design/bccie/export')} </option>
                                      </select>
                                 </fieldset>
                                 {set counter=inc( $counter )}
                         {/section}
                 {/let}
-                
+
         {/section}
 {/let}
 {/let}
