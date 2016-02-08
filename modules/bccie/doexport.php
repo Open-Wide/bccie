@@ -66,7 +66,11 @@ $parser = new Parser( $objectID );
 
 header( "Content-Disposition: attachment; filename=$filename" );
 
-echo "\xEF\xBB\xBF";
+if ( $export_type != 'sylk' )
+{
+    // UTF-8 Byte Order Mark
+    echo "\xEF\xBB\xBF";
+}
 
 $export_string = $parser->exportInformationCollection(
                             $collections,
